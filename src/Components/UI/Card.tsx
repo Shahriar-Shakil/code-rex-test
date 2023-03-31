@@ -6,32 +6,41 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Card } from "antd";
 import Link from "next/link";
+import { IUser } from "@/utils/interface";
+import Image from "next/image";
 
 const { Meta } = Card;
-
-const UserCard: React.FC = () => (
-  <Card
-    style={{ width: 300, margin: "auto" }}
-    cover={
+interface Props {
+  user: IUser;
+}
+const UserCard: React.FC<Props> = ({ user }) => {
+  const { firstName, lastName, university } = user ?? {};
+  return (
+    <Card
+      hoverable
+      style={{ width: 300, margin: "auto" }}
+      cover={
+        <Link href="user/1">
+          <Image
+            alt="example"
+            src={user.image}
+            width={250}
+            height="250"
+            style={{ width: "100%", objectFit: "contain" }}
+          />
+        </Link>
+      }
+      actions={[
+        <SettingOutlined key="setting" />,
+        <EditOutlined key="edit" />,
+        <EllipsisOutlined key="ellipsis" />,
+      ]}
+    >
       <Link href="user/1">
-        <img
-          alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-        />
+        <Meta title={`${firstName} ${lastName}`} description={university} />
       </Link>
-    }
-    actions={[
-      <SettingOutlined key="setting" />,
-      <EditOutlined key="edit" />,
-      <EllipsisOutlined key="ellipsis" />,
-    ]}
-  >
-    <Meta
-      avatar={<Avatar src="https://joesch.moe/api/v1/random" />}
-      title="Card title"
-      description="This is the description"
-    />
-  </Card>
-);
+    </Card>
+  );
+};
 
 export default UserCard;
