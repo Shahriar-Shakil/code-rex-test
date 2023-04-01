@@ -3,6 +3,7 @@ import { request } from "@/config/api";
 import "@/styles/globals.css";
 import "@/styles/styles.css";
 import "antd/dist/reset.css";
+import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import React from "react";
 import { SWRConfig } from "swr";
@@ -20,8 +21,10 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, []);
   return (
-    <SWRConfig value={{ fetcher }}>
-      {loading ? <LoadingSpinner /> : <Component {...pageProps} />}
-    </SWRConfig>
+    <AnimatePresence mode="wait" initial={false}>
+      <SWRConfig value={{ fetcher }}>
+        {loading ? <LoadingSpinner /> : <Component {...pageProps} />}
+      </SWRConfig>
+    </AnimatePresence>
   );
 }

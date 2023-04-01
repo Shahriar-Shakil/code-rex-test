@@ -1,4 +1,5 @@
 import { Breadcrumb, Layout as AntLayout, theme } from "antd";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
 import Header from "./Header";
@@ -23,19 +24,25 @@ const Layout: React.FC<Props> = ({ children, breadcrumb }) => {
       <Content style={{ padding: "0 50px" }}>
         <Breadcrumb style={{ margin: "16px 0" }}>
           {breadcrumb?.map((item) => (
-            <Link key={item.name} href={item.url}>
-              <Breadcrumb style={{ paddingRight: "8px" }}>
-                {item.name} /
-              </Breadcrumb>
-            </Link>
+            <Breadcrumb.Item key={item.name}>
+              <Link href={item.url}> {item.name}</Link>
+            </Breadcrumb.Item>
           ))}
         </Breadcrumb>
-        <div
+        <motion.div
           className="site-layout-content"
           style={{ background: colorBgContainer }}
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 300, opacity: 0 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
         >
           {children}
-        </div>
+        </motion.div>
       </Content>
       <Footer style={{ textAlign: "center" }}>
         Ant Design ©2023 Created by Ant UED
