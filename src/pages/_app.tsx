@@ -21,7 +21,11 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, []);
   return (
-    <AnimatePresence mode="wait" initial={false}>
+    <AnimatePresence
+      mode="wait"
+      initial={false}
+      onExitComplete={() => window.scrollTo(0, 0)}
+    >
       <SWRConfig value={{ fetcher }}>
         {loading ? <LoadingSpinner /> : <Component {...pageProps} />}
       </SWRConfig>
