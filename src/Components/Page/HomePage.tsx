@@ -1,6 +1,6 @@
 import Layout from "../Layout/Layout";
 import { Col, Empty, Row, Space } from "antd";
-import UserCard from "../UI/Card";
+import UserCard from "../UI/userCard";
 import PaginationComponent from "../UI/Pagination";
 import { useUsers } from "@/data/get/useUsers";
 import SkeletonCard from "../UI/SkeletonCard";
@@ -14,13 +14,13 @@ const HomePage: React.FC = () => {
 
   let users: any;
   if (error) {
-    const { title, status } = error.response ?? {};
+    const { data, status } = error.response ?? {};
     users = (
       <Space
         direction="horizontal"
         style={{ width: "100%", justifyContent: "center", marginTop: "16px" }}
       >
-        <Error status={status} title={title} />;
+        <Error status={status} title={data} />;
       </Space>
     );
   } else if (loading) {

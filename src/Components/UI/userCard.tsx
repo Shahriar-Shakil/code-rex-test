@@ -1,26 +1,27 @@
-import React from "react";
+import { getFullName } from "@/utils";
+import { IUser } from "@/utils/interface";
 import {
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { Avatar, Card } from "antd";
-import Link from "next/link";
-import { IUser } from "@/utils/interface";
+import { Card } from "antd";
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 const { Meta } = Card;
 interface Props {
   user: IUser;
 }
 const UserCard: React.FC<Props> = ({ user }) => {
-  const { firstName, lastName, university } = user ?? {};
+  const { id, firstName, lastName, university } = user ?? {};
   return (
     <Card
       hoverable
       style={{ width: 300, margin: "auto" }}
       cover={
-        <Link href="user/1">
+        <Link href={`users/${id}`}>
           <Image
             alt="example"
             src={user.image}
@@ -36,8 +37,11 @@ const UserCard: React.FC<Props> = ({ user }) => {
         <EllipsisOutlined key="ellipsis" />,
       ]}
     >
-      <Link href="user/1">
-        <Meta title={`${firstName} ${lastName}`} description={university} />
+      <Link href={`users/${id}`}>
+        <Meta
+          title={getFullName(firstName, lastName)}
+          description={university}
+        />
       </Link>
     </Card>
   );
