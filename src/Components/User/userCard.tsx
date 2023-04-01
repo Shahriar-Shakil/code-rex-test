@@ -19,7 +19,7 @@ const UserCard: React.FC<Props> = ({ user }) => {
   return (
     <Card
       hoverable
-      style={{ width: 300, margin: "auto" }}
+      style={{ width: "100%", margin: "auto" }}
       cover={
         <Link href={`users/${id}`}>
           <Image
@@ -32,7 +32,6 @@ const UserCard: React.FC<Props> = ({ user }) => {
         </Link>
       }
       actions={[
-        <SettingOutlined key="setting" />,
         <EditOutlined key="edit" />,
         <EllipsisOutlined key="ellipsis" />,
       ]}

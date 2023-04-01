@@ -1,10 +1,11 @@
 import { useUser } from "@/data/get/useUser";
 import { getFullName } from "@/utils";
-import { Card, Col, Descriptions, Divider, Row, Space } from "antd";
+import { Card, Col, Divider, Row, Space } from "antd";
 import { useRouter } from "next/router";
 import Layout from "../Layout/Layout";
 import { Error } from "../UI/Error";
 import Posts from "../User/Posts";
+import UserDescriptions from "../User/UserDescriptions";
 
 type Props = {};
 
@@ -13,7 +14,7 @@ export default function UserPage({}: Props) {
   const { id } = router.query;
   const { data, loading, error } = useUser(Number(id));
 
-  const { firstName, lastName, phone, address, username, email } = data ?? {};
+  const { firstName, lastName } = data ?? {};
   if (error) {
     const { data, status } = error.response ?? {};
     return (
@@ -44,19 +45,7 @@ export default function UserPage({}: Props) {
             bordered={false}
             style={{ width: "100%" }}
           >
-            <Descriptions title="User Info">
-              <Descriptions.Item label="Name">
-                {getFullName(firstName, lastName)}
-              </Descriptions.Item>
-              <Descriptions.Item label="Telephone">
-                <a href={`tel:${phone}`}>{phone}</a>
-              </Descriptions.Item>
-              <Descriptions.Item label="Live">
-                {address?.address}, {address?.city}
-              </Descriptions.Item>
-              <Descriptions.Item label="username">{username}</Descriptions.Item>
-              <Descriptions.Item label="email">{email}</Descriptions.Item>
-            </Descriptions>
+            <UserDescriptions user={data} />
           </Card>
         </Col>
 

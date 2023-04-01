@@ -10,7 +10,7 @@ type Props = {};
 export default function SkeletonCard({}: Props) {
   return (
     <Card
-      style={{ width: 300, marginTop: 16 }}
+      style={{ width: "100%", marginTop: 16 }}
       actions={[
         <SettingOutlined key="setting" />,
         <EditOutlined key="edit" />,
