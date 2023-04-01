@@ -23,9 +23,11 @@ const Layout: React.FC<Props> = ({ children, breadcrumb }) => {
       <Content style={{ padding: "0 50px" }}>
         <Breadcrumb style={{ margin: "16px 0" }}>
           {breadcrumb?.map((item) => (
-            <Breadcrumb.Item key={item.name}>
-              <Link href={item.url}>{item.name}</Link>
-            </Breadcrumb.Item>
+            <Link key={item.name} href={item.url}>
+              <Breadcrumb style={{ paddingRight: "8px" }}>
+                {item.name} /
+              </Breadcrumb>
+            </Link>
           ))}
         </Breadcrumb>
         <div

@@ -26,7 +26,6 @@ const HomePage: React.FC = () => {
   } = useUsers(pageSize, skipValue);
   const { data: searchData, loading: searchLoad } = useUsersSearch(searchTerm);
 
-  console.log(searchData);
   const onSearchHandler = (value: string) => {
     setSearchTerm(value);
   };
