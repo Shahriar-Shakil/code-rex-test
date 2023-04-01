@@ -46,7 +46,7 @@ const HomePage: React.FC = () => {
     );
   }
   return (
-    <Layout>
+    <Layout breadcrumb={[{ name: "Home", active: true, url: "/" }]}>
       <Row gutter={[16, 16]}>{users}</Row>
       {data?.length && <PaginationComponent />}
     </Layout>
